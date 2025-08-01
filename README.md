@@ -1,8 +1,77 @@
-# Welcome to your Lovable project
+# HopeCore Hub - Mental Health Support Platform
 
-## Project info
+## 🌟 Live Web Application
 
-**URL**: https://lovable.dev/projects/c974d77c-52a2-4ff6-901d-79dcc1ee224a
+**Access HopeCore Hub here:** [https://preview--new-hopecorehub.lovable.app](https://preview--new-hopecorehub.lovable.app)
+
+## 🔗 Share This Link
+
+You can embed this web app on your website (https://www.ingabohopecore.com) by:
+
+1. **Direct Link**: Share the URL above for full web app access
+2. **iFrame Embed**: 
+   ```html
+   <iframe 
+     src="https://preview--new-hopecorehub.lovable.app" 
+     width="100%" 
+     height="600px" 
+     frameborder="0">
+   </iframe>
+   ```
+
+## 🚀 Features
+
+### ✅ Fully Optimized for Web
+- **Responsive Design**: Optimized for desktop, tablet, and mobile
+- **Desktop Navigation**: Top navigation bar for desktop users
+- **Mobile Navigation**: Bottom navigation for mobile devices
+- **Cross-Platform**: Works seamlessly across all devices
+
+### 🔐 Authentication System
+- **Simple Sign Up/Sign In**: Streamlined authentication flow
+- **Guest Mode**: Browse without creating an account
+- **Account Management**: Full profile and preference management
+- **Privacy First**: Anonymous posting by default
+
+### 💬 Core Features
+- **Anonymous Forum**: Safe space for sharing and support
+- **Mahoro AI**: 24/7 multilingual AI companion (English/Kinyarwanda)
+- **Muganga Therapy**: Professional therapy booking
+- **Wellness Resources**: Mental health tools and information
+- **SOS Button**: Emergency contact features
+
+### 🌍 Multilingual Support
+- English and Kinyarwanda language options
+- Culturally appropriate content for Rwanda
+- AI that understands local context
+
+### ♿ Accessibility Features
+- High contrast mode
+- Font size adjustment
+- Screen reader compatible
+- Keyboard navigation support
+
+## 🛡️ Privacy & Security
+- End-to-end encryption
+- Anonymous posting by default
+- No data sharing with third parties
+- GDPR compliant
+- Secure data storage
+
+## 🎨 Modern Design
+- Beautiful gradient backgrounds
+- Intuitive user interface
+- Consistent design system
+- Dark/light mode support
+
+## 📱 Progressive Web App Ready
+- Can be installed on mobile devices
+- Offline capabilities
+- Push notifications (future feature)
+
+---
+
+**Project URL**: https://lovable.dev/projects/c974d77c-52a2-4ff6-901d-79dcc1ee224a
 
 ## How can I edit this code?
 

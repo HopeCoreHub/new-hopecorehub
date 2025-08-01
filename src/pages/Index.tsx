@@ -53,8 +53,8 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#D3E4FD] to-white dark:from-gray-900 dark:to-gray-800 pb-20 pt-safe">
-      <div className="container mx-auto px-4 py-6 max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-[#D3E4FD] to-white dark:from-gray-900 dark:to-gray-800 pb-20 md:pb-0 md:pt-20 pt-safe">
+      <div className="container mx-auto px-4 py-6 max-w-md md:max-w-4xl">
         {/* Header with Profile and Theme Toggle in corners */}
         <div className="flex items-start justify-between mb-8 relative">
           <div className="absolute top-0 left-0">
@@ -91,7 +91,7 @@ const Index = () => {
         {/* Quick Actions */}
         <section className="mb-8">
           <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Quick Access</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {quickActions.map((action, index) => (
               <Card key={index} className="border-[#9E78E9]/20 hover:border-[#9E78E9]/40 transition-colors cursor-pointer" onClick={() => navigate(action.path)}>
                 <CardContent className="p-4 text-center">

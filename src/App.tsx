@@ -8,6 +8,7 @@ import { ThemeProvider } from "./components/ThemeProvider";
 import { AccessibilityProvider } from "./contexts/AccessibilityContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { AuthProvider } from "./hooks/useAuth";
+import DesktopNav from "./components/DesktopNav";
 import Index from "./pages/Index";
 import Welcome from "./pages/Welcome";
 import LanguageSelect from "./pages/LanguageSelect";
@@ -31,11 +32,12 @@ const App = () => (
       <LanguageProvider>
         <AccessibilityProvider>
           <AuthProvider>
-            <TooltipProvider>
-              <Toaster />
-              <Sonner />
-              <BrowserRouter>
-                <Routes>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <DesktopNav />
+            <Routes>
                   <Route path="/language" element={<LanguageSelect />} />
                   <Route path="/welcome" element={<Welcome />} />
                   <Route path="/onboarding-quote" element={<OnboardingQuote />} />

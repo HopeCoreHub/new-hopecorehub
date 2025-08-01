@@ -30,8 +30,8 @@ const Muganga = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#D3E4FD] to-white dark:from-gray-900 dark:to-gray-800 pb-20 pt-safe">
-      <div className="container mx-auto px-4 py-6 max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-[#D3E4FD] to-white dark:from-gray-900 dark:to-gray-800 pb-20 md:pb-0 md:pt-20 pt-safe">
+      <div className="container mx-auto px-4 py-6 max-w-md md:max-w-4xl">
         {/* Header */}
         <div className="text-center mb-6">
           <div className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4 overflow-hidden">

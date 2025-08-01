@@ -127,7 +127,7 @@ const Welcome = () => {
 
   if (showConsent) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#9E78E9] to-[#D3E4FD] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-[#9E78E9] to-[#D3E4FD] flex items-center justify-center p-4 md:pt-20">
         <Card className="w-full max-w-md mx-auto">
           <CardHeader className="text-center space-y-4">
             <div className="mx-auto w-20 h-20 bg-[#9E78E9] rounded-full flex items-center justify-center">
@@ -193,7 +193,7 @@ const Welcome = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#9E78E9] to-[#D3E4FD] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#9E78E9] to-[#D3E4FD] flex items-center justify-center p-4 md:pt-20">
       <Card className="w-full max-w-md mx-auto">
         <CardHeader className="text-center space-y-4">
           <div className="mx-auto w-20 h-20 bg-[#9E78E9] rounded-full flex items-center justify-center">

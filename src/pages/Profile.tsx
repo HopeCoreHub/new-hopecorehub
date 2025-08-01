@@ -31,8 +31,8 @@ const Profile = () => {
   // Show guest upgrade prompt if user is in guest mode
   if (isGuest) {
     return (
-      <div className="min-h-screen bg-gray-900 text-white pb-20">
-        <div className="container mx-auto px-4 py-6 max-w-md">
+      <div className="min-h-screen bg-gray-900 text-white pb-20 md:pb-0 md:pt-20">
+        <div className="container mx-auto px-4 py-6 max-w-md md:max-w-4xl">
           <ProfileHeader />
 
           <Card className="bg-gradient-to-r from-[#9E78E9] to-[#8B69D6] border-none text-white mb-6">
@@ -157,8 +157,8 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white pb-20">
-      <div className="container mx-auto px-4 py-6 max-w-md">
+    <div className="min-h-screen bg-gray-900 text-white pb-20 md:pb-0 md:pt-20">
+      <div className="container mx-auto px-4 py-6 max-w-md md:max-w-4xl">
         <ProfileHeader />
 
         <ProfilePictureSection
