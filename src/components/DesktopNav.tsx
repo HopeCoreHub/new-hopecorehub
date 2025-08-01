@@ -31,7 +31,7 @@ const DesktopNav = () => {
         {/* Logo */}
         <div className="flex items-center space-x-2">
           <Heart className="w-8 h-8 text-primary fill-primary" />
-          <span className="text-xl font-bold text-foreground">HopeCore</span>
+          <span className="text-xl font-bold text-foreground">HopeCore Hub</span>
         </div>
 
         {/* Navigation Links */}
