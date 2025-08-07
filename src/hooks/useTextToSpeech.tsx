@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 export const useTextToSpeech = () => {
   const [isEnabled, setIsEnabled] = useState(() => {
@@ -7,49 +7,95 @@ export const useTextToSpeech = () => {
     return saved ? JSON.parse(saved) : false; // Default to false (off)
   });
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const currentUtteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     localStorage.setItem('mahoro-tts-enabled', JSON.stringify(isEnabled));
   }, [isEnabled]);
 
-  const speak = (text: string, language: string = 'en') => {
-    if (!isEnabled || !text) return;
-
-    // Cancel any ongoing speech
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    
-    // Set language based on selection
-    const langMap: { [key: string]: string } = {
-      'en': 'en-US',
-      'fr': 'fr-FR',
-      'sw': 'sw-KE',
-      'rw': 'rw-RW' // May not be available on all browsers
+  // Cleanup on component unmount
+  useEffect(() => {
+    return () => {
+      stop();
     };
-    
-    utterance.lang = langMap[language] || 'en-US';
-    utterance.rate = 0.9;
-    utterance.pitch = 1;
+  }, []);
 
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
-
-    window.speechSynthesis.speak(utterance);
-  };
-
-  const stop = () => {
-    window.speechSynthesis.cancel();
-    setIsSpeaking(false);
-  };
-
-  const toggle = () => {
-    setIsEnabled(!isEnabled);
-    if (!isEnabled) {
-      stop(); // Stop speaking if disabling
+  const stop = useCallback(() => {
+    // Clear any pending timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
-  };
+    
+    // Cancel speech synthesis
+    window.speechSynthesis.cancel();
+    currentUtteranceRef.current = null;
+    setIsSpeaking(false);
+  }, []);
+
+  const speak = useCallback((text: string, language: string = 'en') => {
+    // Don't speak if disabled or no text
+    if (!isEnabled || !text.trim()) return;
+
+    // Stop any ongoing speech first
+    stop();
+
+    // Wait a brief moment for the stop to take effect
+    timeoutRef.current = setTimeout(() => {
+      const utterance = new SpeechSynthesisUtterance(text.trim());
+      currentUtteranceRef.current = utterance;
+      
+      // Set language based on selection
+      const langMap: { [key: string]: string } = {
+        'en': 'en-US',
+        'fr': 'fr-FR',
+        'sw': 'sw-KE',
+        'rw': 'rw-RW' // May not be available on all browsers
+      };
+      
+      utterance.lang = langMap[language] || 'en-US';
+      utterance.rate = 0.8; // Slightly slower for clarity
+      utterance.pitch = 1;
+      utterance.volume = 0.9;
+
+      utterance.onstart = () => {
+        setIsSpeaking(true);
+      };
+      
+      utterance.onend = () => {
+        setIsSpeaking(false);
+        currentUtteranceRef.current = null;
+      };
+      
+      utterance.onerror = (event) => {
+        console.warn('Speech synthesis error:', event.error);
+        setIsSpeaking(false);
+        currentUtteranceRef.current = null;
+      };
+
+      utterance.onpause = () => {
+        setIsSpeaking(false);
+      };
+
+      utterance.onresume = () => {
+        setIsSpeaking(true);
+      };
+
+      // Check if TTS is still enabled before speaking
+      if (isEnabled) {
+        window.speechSynthesis.speak(utterance);
+      }
+    }, 100);
+  }, [isEnabled, stop]);
+
+  const toggle = useCallback(() => {
+    if (isEnabled) {
+      // If disabling, stop current speech
+      stop();
+    }
+    setIsEnabled(!isEnabled);
+  }, [isEnabled, stop]);
 
   return {
     isEnabled,

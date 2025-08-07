@@ -17,7 +17,7 @@ const Mahoro = () => {
   });
   
   const { messages, isLoading, sendMessage } = useMahoroChat();
-  const { isEnabled: ttsEnabled, isSpeaking, speak, toggle: toggleTTS } = useTextToSpeech();
+  const { isEnabled: ttsEnabled, isSpeaking, speak, stop: stopTTS, toggle: toggleTTS } = useTextToSpeech();
 
   const languages = [
     { value: "en", label: "EN", fullLabel: "English" },
@@ -34,10 +34,27 @@ const Mahoro = () => {
   // Auto-speak bot messages when TTS is enabled
   useEffect(() => {
     const lastMessage = messages[messages.length - 1];
-    if (lastMessage && lastMessage.isBot && ttsEnabled) {
-      speak(lastMessage.text, selectedLanguage);
+    if (lastMessage && lastMessage.isBot && ttsEnabled && !isLoading) {
+      // Small delay to ensure the message is fully rendered
+      const timer = setTimeout(() => {
+        speak(lastMessage.text, selectedLanguage);
+      }, 300);
+      
+      return () => clearTimeout(timer);
     }
-  }, [messages, ttsEnabled, selectedLanguage, speak]);
+  }, [messages, ttsEnabled, selectedLanguage, speak, isLoading]);
+
+  // Stop TTS when language changes
+  useEffect(() => {
+    stopTTS();
+  }, [selectedLanguage, stopTTS]);
+
+  // Stop TTS when component unmounts or when loading starts
+  useEffect(() => {
+    if (isLoading) {
+      stopTTS();
+    }
+  }, [isLoading, stopTTS]);
 
   const handleSendMessage = async () => {
     if (!message.trim() || isLoading) return;
@@ -104,14 +121,34 @@ const Mahoro = () => {
                 variant="outline" 
                 size="sm"
                 onClick={toggleTTS}
-                className={`${ttsEnabled ? 'bg-[#9E78E9] text-white' : ''}`}
+                className={`transition-all duration-200 ${
+                  ttsEnabled 
+                    ? 'bg-[#9E78E9] text-white border-[#9E78E9] hover:bg-[#8B69D6]' 
+                    : 'hover:bg-gray-50 dark:hover:bg-gray-800'
+                }`}
+                title={ttsEnabled ? "Disable text-to-speech" : "Enable text-to-speech"}
               >
                 {ttsEnabled ? (
-                  isSpeaking ? <Volume2 className="w-4 h-4 animate-pulse" /> : <Volume2 className="w-4 h-4" />
+                  isSpeaking ? (
+                    <Volume2 className="w-4 h-4 animate-pulse" />
+                  ) : (
+                    <Volume2 className="w-4 h-4" />
+                  )
                 ) : (
                   <VolumeX className="w-4 h-4" />
                 )}
               </Button>
+              {isSpeaking && (
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={stopTTS}
+                  className="text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
+                  title="Stop speaking"
+                >
+                  <VolumeX className="w-4 h-4" />
+                </Button>
+              )}
             </div>
           </div>
         </div>
