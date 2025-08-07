@@ -241,8 +241,19 @@ interface LanguageProviderProps {
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
+    // Try to get from localStorage first
     const stored = localStorage.getItem('hopecore-language');
-    return (stored as Language) || 'en';
+    if (stored) {
+      return stored as Language;
+    }
+    
+    // Fallback to browser language detection
+    const browserLang = navigator.language.toLowerCase();
+    if (browserLang.startsWith('fr')) return 'fr';
+    if (browserLang.startsWith('rw') || browserLang.includes('rw')) return 'rw';
+    if (browserLang.startsWith('sw')) return 'sw';
+    
+    return 'en'; // Default to English
   });
 
   const setLanguage = (lang: Language) => {

@@ -26,8 +26,11 @@ serve(async (req) => {
     // Get the Anthropic API key
     const anthropicApiKey = Deno.env.get('ANTHROPIC_API_KEY')
     if (!anthropicApiKey) {
+      console.error('ANTHROPIC_API_KEY is not configured')
       throw new Error('ANTHROPIC_API_KEY is not configured')
     }
+    
+    console.log('API Key configured:', anthropicApiKey ? 'Yes' : 'No')
 
     // Determine if user is anonymous or authenticated
     const isAnonymous = !userId || userId === 'anonymous' || userId === 'guest'

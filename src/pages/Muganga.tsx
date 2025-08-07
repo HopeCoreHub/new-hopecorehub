@@ -120,7 +120,7 @@ const Muganga = () => {
               <DialogTrigger asChild>
                 <Button 
                   onClick={handleSubscribe}
-                  className="w-full bg-[#9E78E9] hover:bg-[#8B69D6] text-white py-6 text-lg"
+                  className="w-full bg-[#9E78E9] hover:bg-[#8B69D6] text-white py-6 text-base"
                 >
                   Subscribe Now - 2,000 RWF/month
                 </Button>

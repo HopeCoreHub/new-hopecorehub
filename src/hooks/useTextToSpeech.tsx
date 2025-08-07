@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 export const useTextToSpeech = () => {
   const [isEnabled, setIsEnabled] = useState(() => {
     const saved = localStorage.getItem('mahoro-tts-enabled');
-    return saved ? JSON.parse(saved) : false;
+    return saved ? JSON.parse(saved) : false; // Default to false (off)
   });
   const [isSpeaking, setIsSpeaking] = useState(false);
 
