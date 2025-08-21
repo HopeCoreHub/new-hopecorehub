@@ -209,15 +209,27 @@ const Settings = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Button variant="outline" className="w-full justify-start">
+            <Button 
+              variant="outline" 
+              className="w-full justify-start"
+              onClick={() => window.open('https://www.ingabohopecore.com/privacy', '_blank')}
+            >
               Privacy Policy
             </Button>
             
-            <Button variant="outline" className="w-full justify-start">
+            <Button 
+              variant="outline" 
+              className="w-full justify-start"
+              onClick={() => window.open('https://www.ingabohopecore.com/terms', '_blank')}
+            >
               Terms of Service
             </Button>
             
-            <Button variant="outline" className="w-full justify-start">
+            <Button 
+              variant="outline" 
+              className="w-full justify-start"
+              onClick={() => window.open('https://www.ingabohopecore.com/privacy', '_blank')}
+            >
               Data & Privacy Settings
             </Button>
           </CardContent>
