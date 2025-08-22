@@ -235,6 +235,45 @@ export type Database = {
         }
         Relationships: []
       }
+      temp_muganga_survey_responses: {
+        Row: {
+          communication_preference: string
+          cost_feedback: string
+          created_at: string
+          id: string
+          overall_experience: string
+          subscription_date: string
+          survey_completed_date: string
+          therapy_rating: number
+          user_id: string
+          would_recommend: boolean
+        }
+        Insert: {
+          communication_preference: string
+          cost_feedback: string
+          created_at?: string
+          id?: string
+          overall_experience: string
+          subscription_date: string
+          survey_completed_date?: string
+          therapy_rating: number
+          user_id: string
+          would_recommend: boolean
+        }
+        Update: {
+          communication_preference?: string
+          cost_feedback?: string
+          created_at?: string
+          id?: string
+          overall_experience?: string
+          subscription_date?: string
+          survey_completed_date?: string
+          therapy_rating?: number
+          user_id?: string
+          would_recommend?: boolean
+        }
+        Relationships: []
+      }
       user_preferences: {
         Row: {
           created_at: string | null
